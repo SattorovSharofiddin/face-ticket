@@ -28,7 +28,8 @@ INSTALLED_APPS = [
 
     ###
     'apps',
-
+    'tickets',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -95,9 +96,9 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ),
     'DEFAULT_PAGINATION_CLASS': 'apps.shared.pagination.StandardResultsSetPagination',
-    'DEFAULT_RENDERER_CLASSES': (
-        'users.renderer.JSONResponseRenderer',
-    ),
+    # 'DEFAULT_RENDERER_CLASSES': (
+    #     'tickets.renderer.JSONResponseRenderer',
+    # ),
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.QueryParameterVersioning',
     'DEFAULT_VERSION': '1',
     'ALLOWED_VERSIONS': ('1', '2'),

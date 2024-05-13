@@ -1,22 +1,29 @@
-from mptt.fields import TreeForeignKey
-from mptt.models import MPTTModel
-from django.db.models import ForeignKey, CASCADE, URLField, FileField
+from django.contrib.auth.models import AbstractUser
+from django.db.models import (
+    CharField, EmailField, ImageField,
+    BooleanField, TextField, Model, FloatField, SlugField
 
-from shared.models import BaseModel
+)
+from django.utils.translation import gettext_lazy as _
 
-
-class Category(MPTTModel, BaseModel):
-    parent = TreeForeignKey('self', on_delete=CASCADE, null=True, blank=True, related_name='children')
-
-    def __str__(self):
-        return self.name
+from shared.models import nb
+from users.managers import CustomUserManager
 
 
-class Media(BaseModel):
-    url = URLField()
-    data = FileField(upload_to='media/')
+class User(AbstractUser):
+    username = None
+    email = EmailField(unique=True)
+    password = CharField(max_length=255)
+    is_active = BooleanField(
+        _("active"),
+        default=False,
+        help_text=_(
+            "Designates whether this user should be treated as active. "
+            "Unselect this instead of deleting accounts."
+        ),
+    )
 
-    type = ForeignKey(Category, on_delete=CASCADE)
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["password"]
 
-    def __str__(self):
-        return self.name
+    objects = CustomUserManager()

@@ -6,7 +6,7 @@
 #     role = None
 #
 #     def has_permission(self, request: Request, view):
-#         return request.user.is_authenticated and request.user.status == self.role
+#         return request.users.is_authenticated and request.users.status == self.role
 #
 #     def has_object_permission(self, request, view, obj):
-#         return request.user.is_authenticated and request.user.status == self.role
+#         return request.users.is_authenticated and request.users.status == self.role

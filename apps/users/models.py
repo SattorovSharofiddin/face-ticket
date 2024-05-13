@@ -1,20 +1,26 @@
 from django.db import models
 from django.db.models import Model
 
+from shared.models import BaseModel
 
-class Category(Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField()
+
+class Category(BaseModel):
+    def __str__(self):
+        return self.name
+
+
+class Type(BaseModel):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
 
 
-class Media(Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField()
+class Media(BaseModel):
     url = models.URLField()
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    data = models.FileField(upload_to='media/')
+
+    type = models.ForeignKey(Type, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

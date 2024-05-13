@@ -8,3 +8,13 @@ class Category(Model):
 
     def __str__(self):
         return self.name
+
+
+class Media(Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    url = models.URLField()
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name

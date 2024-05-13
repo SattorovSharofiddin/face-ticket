@@ -1,12 +1,10 @@
 from django.contrib.auth.models import AbstractUser
 from django.db.models import (
-    CharField, EmailField, ImageField,
-    BooleanField, TextField, Model, FloatField, SlugField
+    CharField, EmailField, BooleanField, Model
 
 )
 from django.utils.translation import gettext_lazy as _
 
-from shared.models import nb
 from users.managers import CustomUserManager
 
 
